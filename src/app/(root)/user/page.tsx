@@ -1,8 +1,17 @@
 import UserProfile from "@/components/UserProfile";
 import MyGameHistory from "../../../components/GameHistory";
 import { GridBackgroundDemo } from "../../../components/UI/Background";
+import { getSession } from '../../../auth-utils';
+import { redirect } from 'next/navigation';
 
-export default function UserPage() {
+export default async function UserPage() {
+  const session = await getSession();
+
+  if(!session) {
+    redirect("/login");
+  }
+  console.log(session);
+  
   return (
     <GridBackgroundDemo>
       <div className="flex flex-col w-full">

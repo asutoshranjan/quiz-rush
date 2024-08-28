@@ -5,7 +5,7 @@ import { IconArrowsExchange2 } from "@tabler/icons-react";
 import Button from "../Button";
 import Link from "next/link";
 
-export default function PointsToSol({ points }: { points: number }) {
+export default function PointsToSol({ points, cash, onClk }: { points: number, cash?: boolean, onClk?: () => void }) {
   return (
     <div className="mt-5">
       <div className="flex flex-row text-xl font-semibold font-Inter justify-center items-center">
@@ -23,17 +23,21 @@ export default function PointsToSol({ points }: { points: number }) {
         </div>
       </div>
 
-      <div className="my-5">
+      <div className="my-5 text-deep-black font-medium">
         Swap can be done for amounts more than 0.01 SOL
       </div>
       <div className="flex flex-row justify-center mb-5">
-        <Link href={"/redeem"}>
+        { cash === true ?  <button
+            
+            onClick={onClk}
+            className="font-Yeseva text-xl font-medium text-deep-black rounded-2xl px-6 py-2 tracking-wide border-2 border-deep-black hover:bg-light-yellow"
+          > Withdraw </button> : <Link href={"/redeem"}>
           <Button
             text="Redeem SOL"
             onClick={undefined}
             className="font-Yeseva text-xl font-medium text-deep-black rounded-2xl px-6 py-2 tracking-wide border-2 border-deep-black hover:bg-light-yellow"
           />
-        </Link>
+        </Link>}
       </div>
     </div>
   );

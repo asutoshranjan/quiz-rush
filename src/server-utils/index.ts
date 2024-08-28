@@ -27,4 +27,7 @@ function generateRandomName(): string {
   return randomName;
 }
 
-export { client, databases, databaseId, ID, generateRandomName };
+const parentWalletAddress = process.env.PARENT_WALLET_ADDRESS || "";
+const parentPrivateKey = process.env.PARENT_PRIVATE_KEY || "";
+
+export { client, databases, databaseId, ID, generateRandomName, parentWalletAddress, parentPrivateKey };

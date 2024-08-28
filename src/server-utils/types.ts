@@ -34,28 +34,40 @@ export interface Responce {
 }
 
 export interface QuizSession {
-    quizSessionId?: string;
-    userId?: string;
-    questionIds?: string [];
-    answerIds?: string [];
-    currentIndex?: number;
-    totalPoints?: number;
-    ended?: boolean;
-    startTime?: string;
-    endTime?: string;
-    responceId?: string;
-    setId?: string;
-    setTitle?: string;
-    time?: string;
-    imageUrl?: string;
+  quizSessionId?: string;
+  userId?: string;
+  questionIds?: string[];
+  answerIds?: string[];
+  currentIndex?: number;
+  totalPoints?: number;
+  ended?: boolean;
+  startTime?: string;
+  endTime?: string;
+  responceId?: string;
+  setId?: string;
+  setTitle?: string;
+  time?: string;
+  imageUrl?: string;
 }
 
 export interface QuestionSetData {
-  setId?:string;
-  setTitle?:string;
-  questionIds?: string [];
+  setId?: string;
+  setTitle?: string;
+  questionIds?: string[];
   approved?: boolean;
   imageUrl?: string;
   category?: string;
   byUserId?: string;
+}
+
+export interface TransactionData {
+  txnId?: string;
+  txnSignature?: string;
+  from?: string;
+  to?: string;
+  amount?: number;
+  toUserId?: string;
+  fromUserId?: string;
+  status?: string;
+  type?: "pay" | "receive";
 }

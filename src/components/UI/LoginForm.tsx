@@ -11,6 +11,7 @@ export default function LoginForm() {
   const [loading, setLoading] = useState(false);
   const { publicKey, signMessage } = useWallet();
   const router = useRouter();
+  const [intiLogin, setInitLogin] = useState(true);
 
   const requestLogin = async (reqData?: any) => {
     setLoading(true);
@@ -71,31 +72,39 @@ export default function LoginForm() {
   // login function
   const login = async (publicKey: string) => {
     // get and sign the message
-    const signingMessage = await requestSignature({
-      name: name,
-      publickey: publicKey,
-    });
+    try {
+      setInitLogin(false);
+      const signingMessage = await requestSignature({
+        name: name,
+        publickey: publicKey,
+      });
 
-    const message = new TextEncoder().encode(signingMessage);
-    const signature = await signMessage?.(message);
+      const message = new TextEncoder().encode(signingMessage);
+      const signature = await signMessage?.(message);
 
-    console.log("Signature:", signature);
+      console.log("Signature:", signature);
 
-    // verify the signature with public key on server and login the user
-    await requestLogin({
-      publickey: publicKey,
-      signature: signature,
-    }).then((res) => {
-      console.log("Login Response:", res);
-      router.push("/");
-    });
+      // verify the signature with public key on server and login the user
+      await requestLogin({
+        publickey: publicKey,
+        signature: signature,
+      }).then((res) => {
+        console.log("Login Response:", res);
+        router.push("/");
+      });
+    } catch (err) {
+      console.log(err);
+      setInitLogin(true);
+    }
   };
 
   useEffect(() => {
     if (publicKey) {
       console.log("Public Key:", publicKey.toBytes());
       // perform login
+      if (intiLogin) {
       login(publicKey.toBase58());
+      }
     }
   }, [publicKey]);
 

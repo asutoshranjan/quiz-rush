@@ -1,7 +1,23 @@
-export default function Redeem() {
+import UserProfile from "@/components/UserProfile";
+import MyGameHistory from "../../../components/GameHistory";
+import { GridBackgroundDemo } from "../../../components/UI/Background";
+import { getSession } from '../../../auth-utils';
+import { redirect } from 'next/navigation';
+import RedeemPage from "@/components/Redeem";
+
+export default async function Redeem() {
+
+    const session = await getSession();
+
+  if(!session) {
+    redirect("/login");
+  }
+  console.log(session);
     return (
-        <div>
-            <h1>Redeem Page</h1>
+        <GridBackgroundDemo>
+        <div className="w-full md:w-4/5">
+            <RedeemPage />
         </div>
+        </GridBackgroundDemo>
     )
 }

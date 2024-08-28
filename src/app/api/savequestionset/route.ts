@@ -28,6 +28,7 @@ export async function POST(request: NextRequest) {
 
     const setId = reqData.setId;
     const questionIds = reqData.questions;
+    const transactionId = reqData.txnId;
 
     
     const questionSetCollectionId = process.env.COLLECTION_ID_QUESTIONSET || "";
