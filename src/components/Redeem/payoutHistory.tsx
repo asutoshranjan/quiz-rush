@@ -1,7 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import Toast from "../Toast";
+function capitalizeFirstLetter(value: string) {
+  return value
+    .split(' ')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
+}
 
 export default function PayoutHistory({
   loading,
@@ -53,10 +57,10 @@ export default function PayoutHistory({
                       <span className="font-medium">Status: </span>
                       <span
                         className={`${
-                          transaction.status == "paid" ? "text-green-600" : ""
+                          transaction.status == "paid" ? "text-green-600" : transaction.status == "success verified" ? "text-green-700 font-bold font-inter" : "text-red-600"
                         }`}
                       >
-                        {transaction.status}
+                        {capitalizeFirstLetter(transaction.status)}
                       </span>
                     </p>
                   </div>

@@ -72,4 +72,5 @@ export interface TransactionData {
   fromUserId?: string;
   status?: string;
   type?: "pay" | "receive";
+  clicked?: boolean;
 }

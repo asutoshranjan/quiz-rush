@@ -1,16 +1,12 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, use } from "react";
 import Toast from "../Toast";
 import { GridBackgroundDemo } from "../UI/Background";
 import Link from "next/link";
-import {
-  PublicKey,
-  SystemProgram,
-  Transaction,
-  Connection,
-} from "@solana/web3.js";
+import { PublicKey, SystemProgram, Transaction } from "@solana/web3.js";
 import { useWallet, useConnection } from "@solana/wallet-adapter-react";
+import { client, databaseID, collectionID } from "../../lib/appwrite-utils";
 
 export default function AddQuestionFlow() {
   const [step, setStep] = useState(0); // Step 1: Create Set, Step 2: Add Questions
@@ -241,6 +237,7 @@ export default function AddQuestionFlow() {
     }
   }
 
+  // txn entry in db
   const setTxn = async (signatureTxn: any) => {
     try {
       const response = await fetch(`/api/sendtransaction`, {
@@ -272,51 +269,117 @@ export default function AddQuestionFlow() {
     }
   };
 
-  const fetchData2 = async () => {
-    console.log("Fetching..... Txn:", txnDetails.txnSignature);
-    // setLoading(true);
+  function capitalizeFirstLetter(value: string) {
+    return value
+      .split(" ")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
+  }
+
+  // after db entry this is waht we get in response
+
+  const fetchLastTxn = async () => {
+    setLoading(true);
+
+    const response = await fetch(`/api/lasttrans`);
+    const data = await response.json();
+    setLoading(false);
+
+    console.log("Last Txn Data:", data);
+
+    if (data.data) {
+      setTxnDetails(data);
+    }
+  };
+
+  useEffect(() => {
+    fetchLastTxn();
+  }, []);
+
+  const clickRequest = async () => {
+    setLoading(true);
     try {
-      const response = await fetch(`/api/verifytxn`, {
+      const response = await fetch(`/api/clicksettle`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
           txnId: txnDetails.txnId,
-          txnSignature: txnDetails.txnSignature,
         }),
       });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        setTxnResult(errorData);
-        Toast({
-          type: "Error",
-          message: errorData.message || "Failed to get txn details",
-        });
-        throw new Error("Failed to get txn details.");
-      }
-      const data = await response.json();
-      console.log("Txn details Data:", data);
-      setTxnResult(data);
     } catch (err: any) {
       console.log(err);
       Toast({ type: "Error", message: err.message || "Something went wrong" });
     } finally {
-      //   setLoading(false);
+      setLoading(false);
+    }
+  };
+
+  const payAgain = async () => {
+    await clickRequest();
+    // request clicked
+    setTxnDetails(null);
+    setTxnResult(null);
+  };
+
+  const bttnClick = async () => {
+    await clickRequest();
+    // request clicked
+    setStep(1);
+  };
+
+  const getTransaction = async () => {
+    const response = await fetch(`/api/lasttrans`);
+    const data = await response.json();
+
+    console.log("New Txn:", data);
+
+    if (data.data) {
+      setTxnDetails(data);
     }
   };
 
   useEffect(() => {
-    if (txnDetails) {
-      fetchData2();
+    // Check if txnDetails is not null before proceeding
+    if (!txnDetails) {
+      console.log("txnDetails is null, skipping subscription");
+      return;
     }
+
+    if (txnDetails.status) {
+      setTxnResult(txnDetails);
+    } else {
+      getTransaction();
+    }
+
+    // Subscribe to the transaction
+    console.log("Subscribing to txn");
+
+    // appwrite realtime subscription
+    const unsubscribe = client.subscribe(
+      [
+        `databases.${databaseID}.collections.${collectionID}.documents.${txnDetails.txnId}`,
+      ],
+      (response) => {
+        // Callback will be executed on update for the document
+        console.log(response);
+        setTxnResult(response.payload);
+      }
+    );
+
+    return () => {
+      unsubscribe();
+    };
   }, [txnDetails]);
+
+  // now we subscribe to the transaction via appwrite realtime and listen for the txn status
+  // once the txn is successful we move to the next step
 
   const TxnButtonPage = ({ onClk }: { onClk: () => void }) => {
     return (
-      <div className="flex flex-col items-center justify-start p-2 min-h-72">
-        <div className="text-2xl font-Yeseva tracking-wide mb-2">
+      <div className="flex flex-col items-center justify-start p-2 min-h-80">
+        <div className="text-xl md:text-3xl font-Yeseva tracking-wide mb-2">
           Pay and Launch New Game
         </div>
         {txnDetails ? (
@@ -338,16 +401,29 @@ export default function AddQuestionFlow() {
                 Status
               </h3>
               {txnResult ? (
-                <p
-                  className={`text-lg font-medium ${
-                    txnResult.status === "success"
-                      ? "text-green-600"
-                      : "text-red-600"
-                  }`}
-                >
-                  {txnResult.status.charAt(0).toUpperCase() +
-                    txnResult.status.slice(1)}
-                </p>
+                <div className="flex flex-row">
+                  <div
+                    className={`text-lg text-white flex flex-row items-center p-2 px-5 rounded-md font-medium ${
+                      txnResult.status === "success verified"
+                        ? "bg-green-600"
+                        : txnResult.status === "created"
+                        ? "bg-yellow-500"
+                        : "bg-red-600"
+                    }`}
+                  >
+                    {txnResult.status === "created" ? (
+                      <div
+                        className="animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-gray-200 mr-3"
+                        role="status"
+                        aria-label="Loading"
+                      ></div>
+                    ) : (
+                      <div></div>
+                    )}
+
+                    <div>{capitalizeFirstLetter(txnResult.status)}</div>
+                  </div>
+                </div>
               ) : (
                 <div className="flex items-center">
                   {/* Spinner */}
@@ -362,15 +438,26 @@ export default function AddQuestionFlow() {
             </div>
 
             <div className="w-full flex flex-row justify-center items-center">
-              {txnResult && txnResult.status === "success" ? (
+              {txnResult && txnResult.status === "success verified" ? (
                 <button
                   onClick={onClk}
                   className="bg-blue-500 text-white hover:bg-blue-600 lex items-center justify-center py-2 px-7 rounded-lg font-bold"
                 >
                   Next
                 </button>
+              ) : txnResult && txnResult.status === "created" ? (
+                <></>
+              ) : txnResult ? (
+                <button
+                  onClick={() => {
+                    payAgain();
+                  }}
+                  className="bg-red-500 text-white hover:bg-blue-400 lex items-center justify-center py-2 px-7 rounded-lg font-bold"
+                >
+                  Pay Again
+                </button>
               ) : (
-                <div></div>
+                <></>
               )}
             </div>
           </div>
@@ -428,12 +515,12 @@ export default function AddQuestionFlow() {
         </div>
       ) : (
         <div className="py-8 z-10 md:w-2/3">
-          <div className="bg-gradient-to-r from-blue-50 to-purple-100 p-10 rounded-xl shadow-2xl w-full">
+          <div className="bg-gradient-to-r from-blue-100 to-tea-green p-10 rounded-xl shadow-2xl w-full">
             {step === 0 ? (
               <div className="">
                 <TxnButtonPage
                   onClk={() => {
-                    setStep(1);
+                    bttnClick();
                   }}
                 />
               </div>

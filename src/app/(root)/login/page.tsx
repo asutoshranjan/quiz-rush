@@ -5,7 +5,9 @@ import { Lable } from "../../../components/Dashboard";
 import Reveal from "../../../components/UI/RevealComponent";
 import LottieComponent from "../../../components/UI/LottieComponent";
 import Play from "../../../../public/play.json";
+import solanaImg from "../../../../public/solana.png";
 import LoginForm from "@/components/UI/LoginForm";
+import Image from "next/image";
 
 export default async function Home() {
   const session = await getSession();
@@ -27,7 +29,6 @@ export default async function Home() {
           <h2 className="text-5xl z-10 font-Yeseva tracking-wide text-red-700/75 mb-2">
             QuizRush
           </h2>
-
           <Reveal>
             <Lable />
           </Reveal>
@@ -45,15 +46,22 @@ export default async function Home() {
             className="flex justify-center items-center w-4/5 md:w-96"
           />
         </div>
-        <div className="flex flex-col flex-1">
-          <div className="flex flex-col justify-evenly items-center">
-            <h2 className="text-4xl font-Yeseva mb-8">Welcome</h2>
-
-            <LoginForm />
-
-            <h2 className="z-10 font-Yeseva tracking-wide w-1/2 text-center text-gray-800/90 text-xl mt-6">
-              {`Play some quiz. Let's Go!`}
-            </h2>
+        <div className="flex-1 ">
+          <div className="flex flex-col min-h-screen justify-evenly items-center">
+            <div className="h-10"></div>
+            <div className="flex flex-col items-center">
+              <h2 className="text-4xl font-Yeseva mb-8">Welcome</h2>
+              <LoginForm />
+              <h2 className="z-10 font-Yeseva tracking-wide text-center text-gray-800/90 text-xl mt-6">
+                {`Play some quiz. Let's Go!`}
+              </h2>
+            </div>
+            <div className="flex flex-col justify-center items-center">
+              <div className="font-Inter font-semibold tracking-wide text-gray-600">
+                Powered by
+              </div>
+              <Image src={solanaImg} alt="solana" className="w-1/2" />
+            </div>
           </div>
         </div>
       </main>

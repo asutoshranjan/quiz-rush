@@ -51,7 +51,7 @@ export default function RedeemCard({
                     Payout Failed
                   </p>
                   <p className="text-gray-600 mt-2">
-                    Please try again or contact support.
+                    Please again later.
                   </p>
                 </div>
               ) : (

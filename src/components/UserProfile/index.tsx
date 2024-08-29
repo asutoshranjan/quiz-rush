@@ -34,13 +34,11 @@ export default function UserProfile() {
   } else {
 
     return (
-        <div className="md:w-2/3 mx-6 md:mx-auto p-6 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
-          <div className="flex flex-col md:flex-row justify-center">
-          
+        <div className="md:w-2/3 mx-6 md:mx-auto p-6  bg-gradient-to-r from-green-50 to-blue-100 border-gray-200 rounded-lg shadow-lg z-10">
+          <div className="flex flex-col md:flex-row justify-center">          
           <div className="flex flex-col flex-1">
           <div className="flex items-center space-x-4">
             <div className="flex-shrink-0">
-              {/* Placeholder for user profile picture */}
               <IconUser className="h-14 w-14 text-gray-600" />
             </div>
             <div>
@@ -50,8 +48,6 @@ export default function UserProfile() {
             </div>
           </div>
           <div className="mt-6">
-            <p className="text-gray-800 font-semibold">Signature:</p>
-            <p className="text-gray-600 mb-4">{data.signatureValue}</p>
             <p className="text-gray-800 font-semibold">Total Points:</p>
             <p className="text-gray-600 mb-4">{data.points}</p>
             <p className="text-gray-800 font-semibold">Average Answer Time:</p>

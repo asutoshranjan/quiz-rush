@@ -35,6 +35,7 @@ export async function POST(request: NextRequest) {
 
     const data = {
         questionIds: questionIds,
+        txnId: transactionId,
     };
     console.log(data);
 

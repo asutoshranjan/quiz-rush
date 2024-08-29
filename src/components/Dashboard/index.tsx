@@ -4,7 +4,6 @@ import { GridBackgroundDemo } from "../UI/Background";
 import { AppleCards } from "../UI/AppleCards";
 import LottieComponent from "../UI/LottieComponent";
 import Timer from "../../../public/timer.json";
-import Cup from "../../../public/cup.json";
 import Reveal from "../UI/RevealComponent";
 import Appbar from "../Appbar";
 import LeaderboardCard from "../UI/LeaderboardCard";
@@ -15,6 +14,7 @@ import Play from "../../../public/play.json";
 import CupP from "../../../public/cup.png";
 import Image from "next/image";
 import LeaderBoard from "./leaderBoard";
+import solanaImg from "../../../public/solana.png";
 
 export function Lable() {
   return (
@@ -150,7 +150,7 @@ export default async function DashBoard() {
             <div className="flex flex-row-reverse md:absolute z-10 md:translate-x-40 md:-translate-y-32"></div>
           </div>
         </div>
-        <div className="flex flex-row z-10 gap-x-3 font-Inter font-medium mb-16">
+        <div className="flex flex-row z-10 gap-x-3 font-Inter font-medium mb-4 mt-14">
           <h2 className="text-light-blue font-semibold">100x.devs</h2>
           <h2 className="text-gray-700/70">•</h2>
           <div className="flex flex-row gap-x-1">
@@ -160,6 +160,7 @@ export default async function DashBoard() {
             </Link>
           </div>
         </div>
+        <Image src={solanaImg} alt="solana" className="w-1/6 mb-6" />
       </div>
     </GridBackgroundDemo>
   );

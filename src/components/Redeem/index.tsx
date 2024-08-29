@@ -34,7 +34,6 @@ export default function Redeem() {
   const [loadingU, setLoadingU] = useState(false);
 
   const fetchUser = async () => {
-    setLoadingUser(true);
     try {
       const response = await fetch("/api/getuser");
       const resData = await response.json();
