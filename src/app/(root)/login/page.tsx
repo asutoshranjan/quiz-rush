@@ -57,10 +57,10 @@ export default async function Home() {
               </h2>
             </div>
             <div className="flex flex-col justify-center items-center">
-              <div className="font-Inter font-semibold tracking-wide text-gray-600">
+              <div className="font-Inter text-sm font-semibold tracking-wide text-gray-600">
                 Powered by
               </div>
-              <Image src={solanaImg} alt="solana" className="w-1/2" />
+              <Image src={solanaImg} alt="solana" className="w-1/4" />
             </div>
           </div>
         </div>
