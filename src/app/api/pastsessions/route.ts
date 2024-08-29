@@ -32,8 +32,7 @@ export async function POST(request: NextRequest) {
         const limit = 10;
         const offset = (page - 1) * limit;
 
-        // Making a new entry for the quiz session
-        const userId = parsed.user.id; // get this from the request or session like parsed.user.id
+        const userId = parsed.user.id; 
         
 
         // get all quizSession for the user

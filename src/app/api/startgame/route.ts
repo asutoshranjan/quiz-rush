@@ -31,7 +31,7 @@ export async function POST(request: NextRequest) {
     const questionCollectionId = process.env.COLLECTION_ID_QUESTIONS || "";
     const quizSessionsCollectionId = process.env.COLLECTION_ID_QUIZSESSIONS || "";
 
-    // finds the next question id of the user or if its the entry or exit of the session
+    // finds and sends the quiz questions to the user in current session
 
     const quizsession = await databases.getDocument(databaseId, quizSessionsCollectionId, quizSessionId) as QuizSession;
 

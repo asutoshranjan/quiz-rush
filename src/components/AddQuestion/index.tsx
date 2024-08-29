@@ -74,15 +74,15 @@ export default function AddQuestionForm() {
       console.log("Data:", data);
 
       // Clear form data
-        setFormData({
-            title: "",
-            answer: "",
-            optionA: "",
-            optionB: "",
-            optionC: "",
-            optionD: "",
-            type: "mcq",
-        });
+      setFormData({
+        title: "",
+        answer: "",
+        optionA: "",
+        optionB: "",
+        optionC: "",
+        optionD: "",
+        type: "mcq",
+      });
       Toast({ type: "Success", message: "Question added successfully" });
     } catch (err) {
       console.log(err);
@@ -110,177 +110,169 @@ export default function AddQuestionForm() {
           <div className="w-16 h-16 border-4 border-t-transparent border-white rounded-full animate-spin"></div>
         </div>
       )}
-        <div className="py-8 z-10 md:w-2/3 ">
-          <div className="bg-white p-10 rounded-xl shadow-2xl w-full">
-            <h1 className="text-4xl font-Inter font-semibold text-center mb-4 text-gray-800">
-              Add a New Question
-            </h1>
-            <form onSubmit={handleSubmit} className="space-y-6">
-              {/* Title */}
-              <div>
-                <label className="block text-lg font-medium text-gray-700">
-                  Question Title
-                </label>
-                <textarea
-                  name="title"
-                  value={formData.title}
-                  onChange={handleChange}
-                  placeholder="Enter the question"
-                  rows={4}
-                  className={`mt-2 w-full px-4 py-2 border ${
-                    errors.title ? "border-red-500" : "border-gray-300"
-                  } rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500`}
-                ></textarea>
-                {errors.title && (
-                  <p className="text-red-500 text-sm">{errors.title}</p>
-                )}
-              </div>
-
-              {/* Answer */}
-              <div>
-                <label className="block text-lg font-medium text-gray-700">
-                  Correct Answer
-                </label>
-                <input
-                  type="text"
-                  name="answer"
-                  value={formData.answer}
-                  onChange={handleChange}
-                  placeholder="Enter the correct answer"
-                  className={`mt-2 w-full px-4 py-2 border ${
-                    errors.answer ? "border-red-500" : "border-gray-300"
-                  } rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500`}
-                />
-                {errors.answer && (
-                  <p className="text-red-500 text-sm">{errors.answer}</p>
-                )}
-              </div>
-
-              {/* MCQ Options */}
-              {formData.type === "mcq" && (
-                <>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-lg font-medium text-gray-700">
-                        Option A
-                      </label>
-                      <input
-                        type="text"
-                        name="optionA"
-                        value={formData.optionA}
-                        onChange={handleChange}
-                        placeholder="Enter option A"
-                        className={`mt-2 w-full px-4 py-2 border ${
-                          errors.optionA
-                            ? "border-red-500"
-                            : "border-gray-300"
-                        } rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500`}
-                      />
-                      {errors.optionA && (
-                        <p className="text-red-500 text-sm">{errors.optionA}</p>
-                      )}
-                    </div>
-
-                    <div>
-                      <label className="block text-lg font-medium text-gray-700">
-                        Option B
-                      </label>
-                      <input
-                        type="text"
-                        name="optionB"
-                        value={formData.optionB}
-                        onChange={handleChange}
-                        placeholder="Enter option B"
-                        className={`mt-2 w-full px-4 py-2 border ${
-                          errors.optionB
-                            ? "border-red-500"
-                            : "border-gray-300"
-                        } rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500`}
-                      />
-                      {errors.optionB && (
-                        <p className="text-red-500 text-sm">{errors.optionB}</p>
-                      )}
-                    </div>
-
-                    <div>
-                      <label className="block text-lg font-medium text-gray-700">
-                        Option C
-                      </label>
-                      <input
-                        type="text"
-                        name="optionC"
-                        value={formData.optionC}
-                        onChange={handleChange}
-                        placeholder="Enter option C"
-                        className={`mt-2 w-full px-4 py-2 border ${
-                          errors.optionC
-                            ? "border-red-500"
-                            : "border-gray-300"
-                        } rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500`}
-                      />
-                      {errors.optionC && (
-                        <p className="text-red-500 text-sm">{errors.optionC}</p>
-                      )}
-                    </div>
-
-                    <div>
-                      <label className="block text-lg font-medium text-gray-700">
-                        Option D
-                      </label>
-                      <input
-                        type="text"
-                        name="optionD"
-                        value={formData.optionD}
-                        onChange={handleChange}
-                        placeholder="Enter option D"
-                        className={`mt-2 w-full px-4 py-2 border ${
-                          errors.optionD
-                            ? "border-red-500"
-                            : "border-gray-300"
-                        } rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500`}
-                      />
-                      {errors.optionD && (
-                        <p className="text-red-500 text-sm">{errors.optionD}</p>
-                      )}
-                    </div>
-                  </div>
-                </>
+      <div className="py-8 z-10 md:w-2/3 ">
+        <div className="bg-white p-10 rounded-xl shadow-2xl w-full">
+          <h1 className="text-4xl font-Inter font-semibold text-center mb-4 text-gray-800">
+            Add a New Question
+          </h1>
+          <form onSubmit={handleSubmit} className="space-y-6">
+            {/* Title */}
+            <div>
+              <label className="block text-lg font-medium text-gray-700">
+                Question Title
+              </label>
+              <textarea
+                name="title"
+                value={formData.title}
+                onChange={handleChange}
+                placeholder="Enter the question"
+                rows={4}
+                className={`mt-2 w-full px-4 py-2 border ${
+                  errors.title ? "border-red-500" : "border-gray-300"
+                } rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500`}
+              ></textarea>
+              {errors.title && (
+                <p className="text-red-500 text-sm">{errors.title}</p>
               )}
+            </div>
 
-              {/* Question Type */}
-              <div>
-                <label className="block text-lg font-medium text-gray-700">
-                  Question Type
-                </label>
-                <select
-                  name="type"
-                  value={formData.type}
-                  onChange={handleChange}
-                  className="mt-2 w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                >
-                  <option value="mcq">MCQ</option>
-                  <option value="type">Type</option>
-                </select>
-              </div>
+            {/* Answer */}
+            <div>
+              <label className="block text-lg font-medium text-gray-700">
+                Correct Answer
+              </label>
+              <input
+                type="text"
+                name="answer"
+                value={formData.answer}
+                onChange={handleChange}
+                placeholder="Enter the correct answer"
+                className={`mt-2 w-full px-4 py-2 border ${
+                  errors.answer ? "border-red-500" : "border-gray-300"
+                } rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500`}
+              />
+              {errors.answer && (
+                <p className="text-red-500 text-sm">{errors.answer}</p>
+              )}
+            </div>
 
-              {/* Submit Button */}
-              <button
-                type="submit"
-                className="w-full bg-light-blue text-white py-3 rounded-lg font-bold hover:bg-blue-600 transition duration-300"
-                disabled={loading}
-              >
-                {loading ? (
-                  <div className="flex justify-center items-center">
-                    <div className="w-5 h-5 border-t-2 border-r-2 border-white rounded-full animate-spin"></div>
-                    <span className="ml-2">Submitting...</span>
+            {/* MCQ Options */}
+            {formData.type === "mcq" && (
+              <>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-lg font-medium text-gray-700">
+                      Option A
+                    </label>
+                    <input
+                      type="text"
+                      name="optionA"
+                      value={formData.optionA}
+                      onChange={handleChange}
+                      placeholder="Enter option A"
+                      className={`mt-2 w-full px-4 py-2 border ${
+                        errors.optionA ? "border-red-500" : "border-gray-300"
+                      } rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                    />
+                    {errors.optionA && (
+                      <p className="text-red-500 text-sm">{errors.optionA}</p>
+                    )}
                   </div>
-                ) : (
-                  "Add Question"
-                )}
-              </button>
-            </form>
-          </div>
+
+                  <div>
+                    <label className="block text-lg font-medium text-gray-700">
+                      Option B
+                    </label>
+                    <input
+                      type="text"
+                      name="optionB"
+                      value={formData.optionB}
+                      onChange={handleChange}
+                      placeholder="Enter option B"
+                      className={`mt-2 w-full px-4 py-2 border ${
+                        errors.optionB ? "border-red-500" : "border-gray-300"
+                      } rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                    />
+                    {errors.optionB && (
+                      <p className="text-red-500 text-sm">{errors.optionB}</p>
+                    )}
+                  </div>
+
+                  <div>
+                    <label className="block text-lg font-medium text-gray-700">
+                      Option C
+                    </label>
+                    <input
+                      type="text"
+                      name="optionC"
+                      value={formData.optionC}
+                      onChange={handleChange}
+                      placeholder="Enter option C"
+                      className={`mt-2 w-full px-4 py-2 border ${
+                        errors.optionC ? "border-red-500" : "border-gray-300"
+                      } rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                    />
+                    {errors.optionC && (
+                      <p className="text-red-500 text-sm">{errors.optionC}</p>
+                    )}
+                  </div>
+
+                  <div>
+                    <label className="block text-lg font-medium text-gray-700">
+                      Option D
+                    </label>
+                    <input
+                      type="text"
+                      name="optionD"
+                      value={formData.optionD}
+                      onChange={handleChange}
+                      placeholder="Enter option D"
+                      className={`mt-2 w-full px-4 py-2 border ${
+                        errors.optionD ? "border-red-500" : "border-gray-300"
+                      } rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                    />
+                    {errors.optionD && (
+                      <p className="text-red-500 text-sm">{errors.optionD}</p>
+                    )}
+                  </div>
+                </div>
+              </>
+            )}
+
+            {/* Question Type */}
+            <div>
+              <label className="block text-lg font-medium text-gray-700">
+                Question Type
+              </label>
+              <select
+                name="type"
+                value={formData.type}
+                onChange={handleChange}
+                className="mt-2 w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              >
+                <option value="mcq">MCQ</option>
+                <option value="type">Type</option>
+              </select>
+            </div>
+
+            {/* Submit Button */}
+            <button
+              type="submit"
+              className="w-full bg-light-blue text-white py-3 rounded-lg font-bold hover:bg-blue-600 transition duration-300"
+              disabled={loading}
+            >
+              {loading ? (
+                <div className="flex justify-center items-center">
+                  <div className="w-5 h-5 border-t-2 border-r-2 border-white rounded-full animate-spin"></div>
+                  <span className="ml-2">Submitting...</span>
+                </div>
+              ) : (
+                "Add Question"
+              )}
+            </button>
+          </form>
         </div>
+      </div>
     </GridBackgroundDemo>
   );
 }

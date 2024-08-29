@@ -1,6 +1,6 @@
-import { useEffect, useState, useRef } from 'react';
-import Toast from '../Toast';
-import ScoreCard from '../ScoreCard';
+import { useEffect, useState, useRef } from "react";
+import Toast from "../Toast";
+import ScoreCard from "../ScoreCard";
 import LottieComponent from "../UI/LottieComponent";
 import Timer from "../../../public/timer-up-down.json";
 
@@ -11,44 +11,56 @@ interface Question {
   optionB?: string;
   optionC?: string;
   optionD?: string;
-  type: 'mcq' | 'type';
+  type: "mcq" | "type";
   questionId: string;
 }
 
-const Countdown = ({ onTimeUp, loading, submitData }: { onTimeUp: () => void, loading: boolean, submitData: any }) => {
+const Countdown = ({
+  onTimeUp,
+  loading,
+  submitData,
+}: {
+  onTimeUp: () => void;
+  loading: boolean;
+  submitData: any;
+}) => {
   const [timer, setTimer] = useState(40);
-  const [ stop, setStop ] = useState(false);
+  const [stop, setStop] = useState(false);
 
   useEffect(() => {
     if (timer > 0 && !loading && !submitData) {
       const timerId = setTimeout(() => setTimer(timer - 1), 1000);
       return () => clearTimeout(timerId);
     } else {
-      if (timer === 0  && !loading && !submitData){
-      onTimeUp(); // Notify the parent component when time is up
+      if (timer === 0 && !loading && !submitData) {
+        onTimeUp(); // Notify the parent component when time is up
       }
       setStop(true);
     }
   }, [timer]);
 
   return (
-    <div className='flex flex-row justify-end items-center pr-4 translate-y-14'>
-      <LottieComponent animationData={Timer} loop={ !stop } className="flex justify-center items-center w-16" />
-    <h1 className="text-2xl font-semibold text-red-500/80">{timer} s</h1>
+    <div className="flex flex-row justify-end items-center pr-4 translate-y-14">
+      <LottieComponent
+        animationData={Timer}
+        loop={!stop}
+        className="flex justify-center items-center w-16"
+      />
+      <h1 className="text-2xl font-semibold text-red-500/80">{timer} s</h1>
     </div>
   );
 };
 
-const QuizForm = ({ 
-  questions, 
-  userAnswers, 
-  setUserAnswers, 
-  onSubmit 
-}: { 
-  questions: Question[], 
-  userAnswers: Record<string, string>, 
-  setUserAnswers: React.Dispatch<React.SetStateAction<Record<string, string>>>,
-  onSubmit: () => void 
+const QuizForm = ({
+  questions,
+  userAnswers,
+  setUserAnswers,
+  onSubmit,
+}: {
+  questions: Question[];
+  userAnswers: Record<string, string>;
+  setUserAnswers: React.Dispatch<React.SetStateAction<Record<string, string>>>;
+  onSubmit: () => void;
 }) => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
 
@@ -72,13 +84,13 @@ const QuizForm = ({
   const handleClearSelection = () => {
     setUserAnswers({
       ...userAnswers,
-      [currentQuestion.questionId]: '',
+      [currentQuestion.questionId]: "",
     });
   };
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    if (currentQuestion.type === 'type' && inputRef.current) {
+    if (currentQuestion.type === "type" && inputRef.current) {
       inputRef.current.focus();
     }
   }, [currentQuestion]);
@@ -94,34 +106,44 @@ const QuizForm = ({
       </div>
 
       <div className="quiz-container mx-auto p-6 bg-white shadow-lg rounded-md">
-        <h2 className="mb-6 text-2xl font-semibold text-gray-800">{currentQuestion.title}</h2>
+        <h2 className="mb-6 text-2xl font-semibold text-gray-800">
+          {currentQuestion.title}
+        </h2>
 
-        {currentQuestion.type === 'mcq' ? (
+        {currentQuestion.type === "mcq" ? (
           <div className="options space-y-4">
-            {[currentQuestion.optionA, currentQuestion.optionB, currentQuestion.optionC, currentQuestion.optionD].map(
-              (option, index) => (
-                <label key={index} className="block p-3 border rounded-lg hover:bg-gray-100 cursor-pointer">
-                  <input
-                    type="radio"
-                    className="mr-2"
-                    name={`question-${currentQuestion.questionId}`}
-                    value={option || ''}
-                    checked={userAnswers[currentQuestion.questionId] === option}
-                    onChange={handleAnswerChange}
-                  />
-                  {option}
-                </label>
-              )
-            )}
+            {[
+              currentQuestion.optionA,
+              currentQuestion.optionB,
+              currentQuestion.optionC,
+              currentQuestion.optionD,
+            ].map((option, index) => (
+              <label
+                key={index}
+                className="block p-3 border rounded-lg hover:bg-gray-100 cursor-pointer"
+              >
+                <input
+                  type="radio"
+                  className="mr-2"
+                  name={`question-${currentQuestion.questionId}`}
+                  value={option || ""}
+                  checked={userAnswers[currentQuestion.questionId] === option}
+                  onChange={handleAnswerChange}
+                />
+                {option}
+              </label>
+            ))}
           </div>
         ) : (
           <div className="mb-6">
-            <label className="block mb-2 text-lg font-medium">Your Answer:</label>
+            <label className="block mb-2 text-lg font-medium">
+              Your Answer:
+            </label>
             <input
               ref={inputRef}
               type="text"
               className="w-full p-3 border rounded-md"
-              value={userAnswers[currentQuestion.questionId] || ''}
+              value={userAnswers[currentQuestion.questionId] || ""}
               onChange={handleAnswerChange}
             />
           </div>
@@ -168,7 +190,13 @@ const QuizForm = ({
   );
 };
 
-const Quiz = ({ questions, sessionId,}: { questions: Question[], sessionId: string,}) => {
+const Quiz = ({
+  questions,
+  sessionId,
+}: {
+  questions: Question[];
+  sessionId: string;
+}) => {
   const [userAnswers, setUserAnswers] = useState<Record<string, string>>({});
   const [submitData, setSubmitData] = useState<any>(null);
   const [loading, setLoading] = useState(false);
@@ -176,7 +204,7 @@ const Quiz = ({ questions, sessionId,}: { questions: Question[], sessionId: stri
   useEffect(() => {
     const initialAnswers: Record<string, string> = {};
     questions.forEach((question) => {
-      initialAnswers[question.questionId] = '';  // Set default to empty string for each question
+      initialAnswers[question.questionId] = ""; // Set default to empty string for each question
     });
     setUserAnswers(initialAnswers);
   }, [questions]);
@@ -194,7 +222,10 @@ const Quiz = ({ questions, sessionId,}: { questions: Question[], sessionId: stri
 
       if (!response.ok) {
         const errorData = await response.json();
-        Toast({ type: "Error", message: errorData.message || "Failed to submit" });
+        Toast({
+          type: "Error",
+          message: errorData.message || "Failed to submit",
+        });
         throw new Error("Failed to submit.");
       }
 
@@ -202,7 +233,10 @@ const Quiz = ({ questions, sessionId,}: { questions: Question[], sessionId: stri
       console.log("Data:", data);
       setSubmitData(data);
 
-      Toast({ type: `${data.pointsGiven} Points`, message: `Added from this game!` });
+      Toast({
+        type: `${data.pointsGiven} Points`,
+        message: `Added from this game!`,
+      });
     } catch (err: any) {
       console.log(err);
       Toast({ type: "Error", message: err.message || "Something went wrong" });
@@ -234,13 +268,17 @@ const Quiz = ({ questions, sessionId,}: { questions: Question[], sessionId: stri
       {submitData ? (
         <ScoreCard data={submitData} />
       ) : (
-        <div className='-translate-y-7'>
-          <Countdown onTimeUp={handleTimeUp} loading={loading} submitData={submitData} />
-          <QuizForm 
-            questions={questions} 
-            userAnswers={userAnswers} 
-            setUserAnswers={setUserAnswers} 
-            onSubmit={handleFormSubmit} 
+        <div className="-translate-y-7">
+          <Countdown
+            onTimeUp={handleTimeUp}
+            loading={loading}
+            submitData={submitData}
+          />
+          <QuizForm
+            questions={questions}
+            userAnswers={userAnswers}
+            setUserAnswers={setUserAnswers}
+            onSubmit={handleFormSubmit}
           />
         </div>
       )}
@@ -248,6 +286,12 @@ const Quiz = ({ questions, sessionId,}: { questions: Question[], sessionId: stri
   );
 };
 
-export default function QuizPage({ questionsData, session, }: { questionsData: any, session: string}) {
-  return <Quiz questions={questionsData} sessionId={session}/>;
+export default function QuizPage({
+  questionsData,
+  session,
+}: {
+  questionsData: any;
+  session: string;
+}) {
+  return <Quiz questions={questionsData} sessionId={session} />;
 }

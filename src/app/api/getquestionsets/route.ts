@@ -1,6 +1,5 @@
 import {NextRequest, NextResponse } from 'next/server';
 import { decrypt } from "../../../auth-utils";
-import { Question, QuestionSetData } from '../../../server-utils/types'
 import { databases, databaseId, ID } from '../../../server-utils'
 import { Query } from 'node-appwrite';
 

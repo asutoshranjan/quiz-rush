@@ -79,14 +79,16 @@ export default function SessionDetails() {
                   className="relative p-4 border border-gray-200 rounded-lg shadow-sm bg-white flex flex-col justify-center items-start"
                 >
                   {/* Background image with blur */}
-                  { session.imageUrl && <div
-                    className="absolute inset-0 bg-cover bg-center rounded-lg"
-                    style={{
-                      backgroundImage: `url(${session.imageUrl})`,
-                      backgroundSize: "cover",
-                      backgroundPosition: "center",
-                    }}
-                  /> }
+                  {session.imageUrl && (
+                    <div
+                      className="absolute inset-0 bg-cover bg-center rounded-lg"
+                      style={{
+                        backgroundImage: `url(${session.imageUrl})`,
+                        backgroundSize: "cover",
+                        backgroundPosition: "center",
+                      }}
+                    />
+                  )}
 
                   {/* White overlay with transparency */}
                   <div className="absolute inset-0 bg-white opacity-95 rounded-lg"></div>

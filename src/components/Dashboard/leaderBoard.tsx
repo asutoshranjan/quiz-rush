@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import LeaderboardCard from "../UI/LeaderboardCard";
 
-export default function LeaderBoard({limit} : {limit?: number}) {
+export default function LeaderBoard({ limit }: { limit?: number }) {
   const [Rankers, setRankers] = useState([]);
 
   const fetchData = async () => {
@@ -43,7 +43,7 @@ export default function LeaderBoard({limit} : {limit?: number}) {
                 Matches
               </h2>
               <h2 className="text-sm font-bold font-Inter text-black/70  flex-1">
-                Points
+                Tokens
               </h2>
             </div>
           </div>

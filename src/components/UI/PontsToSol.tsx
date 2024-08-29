@@ -5,7 +5,15 @@ import { IconArrowsExchange2 } from "@tabler/icons-react";
 import Button from "../Button";
 import Link from "next/link";
 
-export default function PointsToSol({ points, cash, onClk }: { points: number, cash?: boolean, onClk?: () => void }) {
+export default function PointsToSol({
+  points,
+  cash,
+  onClk,
+}: {
+  points: number;
+  cash?: boolean;
+  onClk?: () => void;
+}) {
   return (
     <div className="mt-5">
       <div className="flex flex-row text-xl font-semibold font-Inter justify-center items-center">
@@ -27,17 +35,23 @@ export default function PointsToSol({ points, cash, onClk }: { points: number, c
         Swap can be done for amounts more than 0.01 SOL
       </div>
       <div className="flex flex-row justify-center mb-5">
-        { cash === true ?  <button
-            
+        {cash === true ? (
+          <button
             onClick={onClk}
             className="font-Yeseva text-xl font-medium text-deep-black rounded-2xl px-6 py-2 tracking-wide border-2 border-deep-black hover:bg-light-yellow"
-          > Withdraw </button> : <Link href={"/redeem"}>
-          <Button
-            text="Redeem SOL"
-            onClick={undefined}
-            className="font-Yeseva text-xl font-medium text-deep-black rounded-2xl px-6 py-2 tracking-wide border-2 border-deep-black hover:bg-light-yellow"
-          />
-        </Link>}
+          >
+            {" "}
+            Withdraw{" "}
+          </button>
+        ) : (
+          <Link href={"/redeem"}>
+            <Button
+              text="Redeem SOL"
+              onClick={undefined}
+              className="font-Yeseva text-xl font-medium text-deep-black rounded-2xl px-6 py-2 tracking-wide border-2 border-deep-black hover:bg-light-yellow"
+            />
+          </Link>
+        )}
       </div>
     </div>
   );

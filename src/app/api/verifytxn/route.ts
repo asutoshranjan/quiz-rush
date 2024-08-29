@@ -18,7 +18,7 @@ export async function POST(request: NextRequest) {
     const txnSignature = reqData.txnSignature;
     console.log("txnSignature", txnSignature);
 
-    // Checking if a transaction sent by the user is valid
+    // Checking if a transaction sent by the user/ payout is valid
     const session = request.cookies.get("session")?.value;
 
     if (!session) {

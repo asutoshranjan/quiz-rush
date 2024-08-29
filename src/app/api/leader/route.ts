@@ -1,7 +1,6 @@
 import {NextRequest, NextResponse } from 'next/server';
 import { decrypt } from "../../../auth-utils";
 import { databases, databaseId, ID } from '../../../server-utils';
-import { User } from '../../../server-utils/types';
 import { Query } from 'node-appwrite';
 
 export async function POST(request: NextRequest) {
@@ -27,9 +26,7 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({ message: "This Method Not Allowed" }, {status: 405});
     }
 
-    const userId = parsed.user.id;
     const userCollectionId = process.env.COLLECTION_ID_USERS || "";
-    const transactionCollectionId = process.env.COLLECTION_ID_TRANSACTIONS || "";
 
     try {
         // get the users leader board

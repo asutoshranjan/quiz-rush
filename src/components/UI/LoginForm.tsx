@@ -103,7 +103,7 @@ export default function LoginForm() {
       console.log("Public Key:", publicKey.toBytes());
       // perform login
       if (intiLogin) {
-      login(publicKey.toBase58());
+        login(publicKey.toBase58());
       }
     }
   }, [publicKey]);

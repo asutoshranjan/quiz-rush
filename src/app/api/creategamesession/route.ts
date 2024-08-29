@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from 'next/server';
 import { decrypt } from "../../../auth-utils";
 import { QuizSession, QuestionSetData } from '../../../server-utils/types';
 import { databases, databaseId, ID } from '../../../server-utils';
-import { Query } from 'node-appwrite';
 
 export async function POST(request: NextRequest) {
     try {
@@ -33,7 +32,7 @@ export async function POST(request: NextRequest) {
         const newId = ID.unique();
 
         // Making a new entry for the quiz session
-        const userId = parsed.user.id; // get this from the request or session like parsed.user.id
+        const userId = parsed.user.id; 
         const questionSetId = reqData.setId;
 
         const questionSetData = await databases.getDocument(
@@ -75,7 +74,7 @@ export async function POST(request: NextRequest) {
         );
 
 
-        // update the user with the new quiz session ToDo: check if this is needed (4 db calls)
+        // update the user with the new quiz session ToDo: check if this is needed (4 db calls?)
 
         const actualUserId = userId;
 

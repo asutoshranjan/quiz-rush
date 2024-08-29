@@ -1,4 +1,4 @@
-import { toast } from "sonner"
+import { toast } from "sonner";
 
 export default function Toast({
   type,
@@ -21,7 +21,9 @@ export default function Toast({
               className={`text-lg font-medium font-Inter ${
                 type.toLowerCase() === "error"
                   ? "text-red-500"
-                  : check? "text-deep-green": "text-deep-black"
+                  : check
+                  ? "text-deep-green"
+                  : "text-deep-black"
               }`}
             >
               {type}

@@ -3,7 +3,7 @@
 import { Inter } from "next/font/google";
 import "../globals.css";
 
-import React, { FC, useMemo } from "react";
+import React, { useMemo } from "react";
 import {
   ConnectionProvider,
   WalletProvider,
@@ -11,8 +11,6 @@ import {
 import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
 import {
   WalletModalProvider,
-  WalletDisconnectButton,
-  WalletMultiButton,
 } from "@solana/wallet-adapter-react-ui";
 import { clusterApiUrl } from "@solana/web3.js";
 

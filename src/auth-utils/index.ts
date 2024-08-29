@@ -38,24 +38,6 @@ export async function login(formData: FormData) {
   cookies().set("session", session, { expires, httpOnly: true });
 }
 
-export async function loginFromWallet({publickey, signature}: {publickey: string, signature: string}) {
-  //TODO: Verify the signature using the public key, get the user or create a new user
-
-  const user = { 
-    id: '12345',
-    name: 'Asutosh R.',
-    publickey: publickey,
-    signature: signature,
-  };
-
-  // Create the session
-  const expires = new Date(Date.now() + 10 * 60000); // ten minutes
-  const session = await encrypt({ user, expires });
-
-  // Save the session in a cookie
-  cookies().set("session", session, { expires, httpOnly: true });
-}
-
 
 export async function logout() {
   // Destroy the session

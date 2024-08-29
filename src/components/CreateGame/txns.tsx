@@ -8,7 +8,11 @@ import {
 import { useWallet, useConnection } from "@solana/wallet-adapter-react";
 import Toast from "../Toast";
 
-export default function TransactionButtons({onClick}: {onClick: () => void}) {
+export default function TransactionButtons({
+  onClick,
+}: {
+  onClick: () => void;
+}) {
   // for sending txn
   const { publicKey, sendTransaction } = useWallet();
   const { connection } = useConnection();
@@ -28,7 +32,9 @@ export default function TransactionButtons({onClick}: {onClick: () => void}) {
       const transaction = new Transaction().add(
         SystemProgram.transfer({
           fromPubkey: publicKey,
-          toPubkey: new PublicKey("8CfExqnCKsnkfkcwnm2ErSMc7jZJ6KBGXtjrpyqHgujg"),
+          toPubkey: new PublicKey(
+            "8CfExqnCKsnkfkcwnm2ErSMc7jZJ6KBGXtjrpyqHgujg"
+          ),
           lamports: 10000000, // 0.01 SOL
         })
       );
@@ -45,13 +51,11 @@ export default function TransactionButtons({onClick}: {onClick: () => void}) {
       // make txn entry in db
 
       await setTxn(signature);
-
-      
     } catch (error) {
-        Toast({ type: "Error", message: "Transaction signing failed" });
+      Toast({ type: "Error", message: "Transaction signing failed" });
       console.error("Transaction Error:", error);
     } finally {
-       setClickedTransaction(false);
+      setClickedTransaction(false);
     }
   }
 
@@ -86,9 +90,6 @@ export default function TransactionButtons({onClick}: {onClick: () => void}) {
     }
   };
 
-
- 
-
   const fetchData = async () => {
     console.log("Fetching..... Txn:", txnDetails.txnSignature);
     // setLoading(true);
@@ -99,8 +100,8 @@ export default function TransactionButtons({onClick}: {onClick: () => void}) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-            txnId: txnDetails.txnId,
-             txnSignature: txnDetails.txnSignature,
+          txnId: txnDetails.txnId,
+          txnSignature: txnDetails.txnSignature,
         }),
       });
 
@@ -132,73 +133,81 @@ export default function TransactionButtons({onClick}: {onClick: () => void}) {
 
   return (
     <div className="flex flex-col items-center justify-center p-4">
-    {txnDetails ? (
-      <div className="w-full max-w-md bg-white p-6 rounded-lg shadow-lg">
-        {/* Transaction Signature Section */}
-        <div className="mb-6">
-          <h2 className="text-2xl font-semibold mb-2 text-gray-800">Transaction Details</h2>
-          <p className="text-gray-700 break-all">
-            <span className="font-medium">Txn Signature:</span> {txnDetails.txnSignature}
-          </p>
-        </div>
-
-        {/* Transaction Status Section */}
-        <div className="mb-4">
-          <h3 className="text-xl font-semibold mb-2 text-gray-800">Status</h3>
-          {txnResult ? (
-            <p
-              className={`text-lg font-medium ${
-                txnResult.status === 'success' ? 'text-green-600' : 'text-red-600'
-              }`}
-            >
-              {txnResult.status.charAt(0).toUpperCase() + txnResult.status.slice(1)}
+      {txnDetails ? (
+        <div className="w-full max-w-md bg-white p-6 rounded-lg shadow-lg">
+          {/* Transaction Signature Section */}
+          <div className="mb-6">
+            <h2 className="text-2xl font-semibold mb-2 text-gray-800">
+              Transaction Details
+            </h2>
+            <p className="text-gray-700 break-all">
+              <span className="font-medium">Txn Signature:</span>{" "}
+              {txnDetails.txnSignature}
             </p>
-          ) : (
-            <div className="flex items-center">
-              {/* Spinner */}
-              <div
-                className="animate-spin rounded-full h-6 w-6 border-t-2 border-b-2 border-blue-500 mr-3"
-                role="status"
-                aria-label="Loading"
-              ></div>
-              <span className="text-gray-700">Waiting for result...</span>
-            </div>
-          )}
+          </div>
+
+          {/* Transaction Status Section */}
+          <div className="mb-4">
+            <h3 className="text-xl font-semibold mb-2 text-gray-800">Status</h3>
+            {txnResult ? (
+              <p
+                className={`text-lg font-medium ${
+                  txnResult.status === "success"
+                    ? "text-green-600"
+                    : "text-red-600"
+                }`}
+              >
+                {txnResult.status.charAt(0).toUpperCase() +
+                  txnResult.status.slice(1)}
+              </p>
+            ) : (
+              <div className="flex items-center">
+                {/* Spinner */}
+                <div
+                  className="animate-spin rounded-full h-6 w-6 border-t-2 border-b-2 border-blue-500 mr-3"
+                  role="status"
+                  aria-label="Loading"
+                ></div>
+                <span className="text-gray-700">Waiting for result...</span>
+              </div>
+            )}
+          </div>
+
+          <div className="w-full flex flex-row justify-center items-center">
+            <button
+              onClick={onClick}
+              className="bg-blue-500 text-white hover:bg-blue-600 lex items-center justify-center py-2 px-7 rounded-lg font-bold"
+            >
+              Next
+            </button>
+          </div>
         </div>
-
-        <div className="w-full flex flex-row justify-center items-center">
-        <button onClick={onClick} className="bg-blue-500 text-white hover:bg-blue-600 lex items-center justify-center py-2 px-7 rounded-lg font-bold">Next</button>
-        </div>
-
-        
-
-      </div>
-    ) : (
-      <button
-        onClick={makePayment}
-        disabled={clickedTransaction}
-        className={`flex items-center justify-center py-3 px-6 rounded-lg font-bold transition duration-300 
+      ) : (
+        <button
+          onClick={makePayment}
+          disabled={clickedTransaction}
+          className={`flex items-center justify-center py-3 px-6 rounded-lg font-bold transition duration-300 
         ${
           clickedTransaction
-            ? 'bg-gray-400 text-gray-700 cursor-not-allowed'
-            : 'bg-blue-500 text-white hover:bg-blue-600'
+            ? "bg-gray-400 text-gray-700 cursor-not-allowed"
+            : "bg-blue-500 text-white hover:bg-blue-600"
         } shadow-md`}
-      >
-        {clickedTransaction ? (
-          <>
-            {/* Spinner */}
-            <div
-              className="animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-white mr-3"
-              role="status"
-              aria-label="Processing"
-            ></div>
-            <span>Wait...</span>
-          </>
-        ) : (
-          'Send 0.1 SOL'
-        )}
-      </button>
-    )}
-  </div>
+        >
+          {clickedTransaction ? (
+            <>
+              {/* Spinner */}
+              <div
+                className="animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-white mr-3"
+                role="status"
+                aria-label="Processing"
+              ></div>
+              <span>Wait...</span>
+            </>
+          ) : (
+            "Send 0.1 SOL"
+          )}
+        </button>
+      )}
+    </div>
   );
 }

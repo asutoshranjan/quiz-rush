@@ -9,10 +9,7 @@ export default function Button({
 }) {
   return (
     <form action={onClick}>
-      <button
-        type="submit"
-        className={className}
-      >
+      <button type="submit" className={className}>
         {text}
       </button>
     </form>

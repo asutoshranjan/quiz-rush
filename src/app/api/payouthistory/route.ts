@@ -1,7 +1,6 @@
 import {NextRequest, NextResponse } from 'next/server';
 import { decrypt } from "../../../auth-utils";
 import { databases, databaseId, ID } from '../../../server-utils';
-import { User } from '../../../server-utils/types';
 import { Query } from 'node-appwrite';
 
 export async function GET(request: NextRequest) {

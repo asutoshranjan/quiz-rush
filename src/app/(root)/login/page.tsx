@@ -5,7 +5,6 @@ import { Lable } from "../../../components/Dashboard";
 import Reveal from "../../../components/UI/RevealComponent";
 import LottieComponent from "../../../components/UI/LottieComponent";
 import Play from "../../../../public/play.json";
-import ConnectWallet from "../../../components/ConnectWallet";
 import LoginForm from "@/components/UI/LoginForm";
 
 export default async function Home() {
@@ -37,7 +36,7 @@ export default async function Home() {
               Let's Play
             </h2>
             <h2 className="z-10 font-Yeseva text-deep-black text-3xl md:text-4xl mt-1 md:mt-3">
-            The Next Move.
+              The Next Move.
             </h2>
           </div>
           <LottieComponent
@@ -48,13 +47,13 @@ export default async function Home() {
         </div>
         <div className="flex flex-col flex-1">
           <div className="flex flex-col justify-evenly items-center">
-          <h2 className="text-4xl font-Yeseva mb-8">Welcome</h2>
+            <h2 className="text-4xl font-Yeseva mb-8">Welcome</h2>
 
-  
+            <LoginForm />
 
-          <LoginForm />
-
-          <h2 className="z-10 font-Yeseva tracking-wide w-1/2 text-center text-gray-800/90 text-xl mt-6">Play some quiz. Let's Go!</h2>
+            <h2 className="z-10 font-Yeseva tracking-wide w-1/2 text-center text-gray-800/90 text-xl mt-6">
+              Play some quiz. Let's Go!
+            </h2>
           </div>
         </div>
       </main>

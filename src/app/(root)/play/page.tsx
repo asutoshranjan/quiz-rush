@@ -93,7 +93,6 @@ export default function PlayPage() {
     console.log("Starting new game");
     console.log("Set Id:", setId);
     await fetchData({ setId: setId });
-    // await fetchData({ a: "new game" });
   };
 
   useEffect(() => {

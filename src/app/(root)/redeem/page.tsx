@@ -1,5 +1,3 @@
-import UserProfile from "@/components/UserProfile";
-import MyGameHistory from "../../../components/GameHistory";
 import { GridBackgroundDemo } from "../../../components/UI/Background";
 import { getSession } from '../../../auth-utils';
 import { redirect } from 'next/navigation';

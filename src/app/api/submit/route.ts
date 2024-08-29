@@ -37,7 +37,7 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  const userId = parsed.user.id; // also can be taken from session as parsed.user.$id
+  const userId = parsed.user.id; 
   const quizSessionId = reqData.quizSession;
   const userAnswer = reqData.userAnswer;
 
@@ -171,7 +171,7 @@ export async function POST(request: NextRequest) {
       updatedata
     );
 
-    //ToDo: check for optimization (6 db calls)
+    //ToDo: check for optimization (6 db calls?)
 
     // add points to the user
     const actualUserId = userId; // match this or get it from the session as parsed.user.$id
