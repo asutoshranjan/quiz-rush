@@ -68,8 +68,8 @@ export default function SessionDetails() {
       <h1 className="text-2xl md:text-3xl font-bold mb-4">Previous Sessions</h1>
       <div className="space-y-4 min-h-96">
         {sessions &&
-          sessions.map((session) => (
-            <div>
+          sessions.map((session, index) => (
+            <div key={index}>
               <Link
                 href={`/play/${session.quizSessionId}`}
                 className="flex-1 w-full"

@@ -33,7 +33,7 @@ export default async function Home() {
           </Reveal>
           <div className="flex flex-col justify-start gap-y-1 w-2/5 mt-4">
             <h2 className="z-10 font-Yeseva text-deep-black text-3xl md:text-5xl">
-              Let's Play
+              {`Let's Play`}
             </h2>
             <h2 className="z-10 font-Yeseva text-deep-black text-3xl md:text-4xl mt-1 md:mt-3">
               The Next Move.
@@ -52,7 +52,7 @@ export default async function Home() {
             <LoginForm />
 
             <h2 className="z-10 font-Yeseva tracking-wide w-1/2 text-center text-gray-800/90 text-xl mt-6">
-              Play some quiz. Let's Go!
+              {`Play some quiz. Let's Go!`}
             </h2>
           </div>
         </div>

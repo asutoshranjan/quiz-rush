@@ -107,7 +107,7 @@ export default async function DashBoard() {
         <div className="flex flex-col-reverse items-center md:flex-row md:items-start w-full justify-evenly z-10 px-10 gap-x-5 gap-y-8 md:gap-y-0 py-10 md:py-2 mb-10">
           <div className="flex flex-col items-center">
             <h2 className="z-10 font-Yeseva text-deep-black text-2xl md:text-4xl">
-              What's Your Next Move?
+              {`What's Your Next Move?`}
             </h2>
             <div className="flex flex-row gap-x-4 md:gap-x-7 w-full mt-10 items-center justify-center">
               <Link href={"/redeem"}>
