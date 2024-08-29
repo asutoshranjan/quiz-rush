@@ -65,6 +65,9 @@ export async function POST(request: NextRequest) {
 
       let transaction = null;
       for (let attempts = 0; attempts < maxAttempts; attempts++) {
+
+        console.log("trying...", attempts);
+        
         transaction = await connection.getTransaction(txnSignature, {
           maxSupportedTransactionVersion: 1,
         });

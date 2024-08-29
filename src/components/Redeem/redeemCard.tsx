@@ -1,69 +1,23 @@
 "use client";
-import { useState, useEffect } from "react";
-import Toast from "../Toast";
 import CopyablePublicKey from "../Appbar/publicKey";
 import { IconUser, IconCopy } from "@tabler/icons-react";
-import PointsToSol from "../UI/PontsToSol";
 
 import coinImg from "../../../public/coin.png";
 import ethImage from "../../../public/eth.png";
 import Image from "next/image";
 import { IconArrowsExchange2 } from "@tabler/icons-react";
 
-export default function RedeemCard() {
-  const [data, setData] = useState<any>();
-  const [payoutData, setPayoutData] = useState<any>(null);
-  const [loading, setLoading] = useState(false);
-
-  const fetchUser = async () => {
-    try {
-      const response = await fetch("/api/getuser");
-      const resData = await response.json();
-      setData(resData);
-    } catch (error: any) {
-      console.log(error);
-      Toast({
-        type: "Error",
-        message: error.message || "Something went wrong",
-      });
-    }
-  };
-
-  useEffect(() => {
-    fetchUser();
-  }, [payoutData]);
-
-  const requestPayout = async () => {
-    setLoading(true);
-    try {
-      const response = await fetch(`/api/payout`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({}),
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        setPayoutData(errorData);
-        Toast({
-          type: "Error",
-          message: errorData.message || "Failed to payout",
-        });
-        throw new Error("Failed to payout.");
-      }
-      const data = await response.json();
-      console.log("Payout Txn Data:", data);
-      setPayoutData(data);
-    } catch (err: any) {
-      console.log(err);
-      Toast({ type: "Error", message: err.message || "Something went wrong" });
-    } finally {
-      setLoading(false);
-    }
-  };
-
+export default function RedeemCard({
+  data,
+  payoutData,
+  loading,
+  requestPayout,
+}: {
+  data: any;
+  payoutData: any;
+  loading: boolean;
+  requestPayout: () => void;
+}) {
   function PointsToSolRedeem({ points }: { points: number }) {
     return (
       <div className="mt-5 z-10">
