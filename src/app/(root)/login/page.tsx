@@ -46,42 +46,15 @@ export default async function Home() {
             className="flex justify-center items-center w-4/5 md:w-96"
           />
         </div>
-        <div className="flex flex-col flex-1 justify-between items-center">
-          <div className="flex flex-col justify-center items-center">
-          <h2 className="text-4xl font-Yeseva mb-4">Welcome</h2>
+        <div className="flex flex-col flex-1">
+          <div className="flex flex-col justify-evenly items-center">
+          <h2 className="text-4xl font-Yeseva mb-8">Welcome</h2>
 
-          {/* <form action={handleSubmit} className="flex flex-col gap-y-10 my-5">
-            <input
-              name="publickey"
-              className="rounded-md p-2 text-xl font-Inter font-semibold bg-white"
-              placeholder="Public Key" 
-            />
-            <input
-              name="signature"
-              className="rounded-md p-2 text-xl font-Inter font-semibold bg-white"
-              placeholder="Name"
-            />
-
-            <button
-              type="submit"
-              className="rounded-lg px-5 py-2 text-xl font-Inter font-semibold text-white bg-deep-green"
-            >
-              Connect Wallet
-            </button>
-          </form> */}
+  
 
           <LoginForm />
 
-          {/* <ConnectWallet /> */}
-
-          <div className="flex gap-5 flex-row">
-            <button className="rounded-md p-2 text-xl font-Inter font-semibold bg-white">
-              Leaderboard
-            </button>
-            <button className="rounded-md p-2 text-xl font-Inter font-semibold bg-white">
-              Cashout
-            </button>
-          </div>
+          <h2 className="z-10 font-Yeseva tracking-wide w-1/2 text-center text-gray-800/90 text-xl mt-6">Play some quiz. Let's Go!</h2>
           </div>
         </div>
       </main>

@@ -2,6 +2,7 @@ import Image from 'next/image';
 import First from '../../../public/first.png';
 import Second from '../../../public/second.png';
 import Third from '../../../public/third.png';
+import LeaderboardCopyablePublicKey from './public-key-copy';
 
 function RenderMedal({index}: {index: number}) {
   if(index == 0) {
@@ -31,18 +32,18 @@ export default function LeaderboardCard({user, index}: {user: any, index: number
             {user.name}
           </h2>
           <h2 className="text-xs font-semibold font-Inter text-deep-black">
-            {"32A9....hdif"}
+            <LeaderboardCopyablePublicKey publickey={user.publickey} />
           </h2>
         </div>
       </div>
-      <h2 className="text-sm font-semibold font-Inter text-deep-black text-center flex-1">
-        {user.avgtime}
-      </h2>
+      { user.avgtime && <h2 className="text-sm font-semibold font-Inter text-deep-black text-center flex-1">
+        {user.avgtime.toFixed(2)}s
+      </h2>}
       <h2 className="text-sm font-semibold font-Inter text-deep-black text-center flex-1">
         {user.matches}
       </h2>
       <h2 className="text-sm font-semibold font-Inter text-deep-black text-center flex-1">
-        {user.tokens}
+        {user.locked}
       </h2>
     </div>
   );

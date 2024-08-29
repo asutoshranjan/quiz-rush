@@ -16,6 +16,7 @@ import CupP from "../../../public/cup.png"
 import timer_up_down from "../../../public/timer-up-down.json"
 import countdown from "../../../public/countdown.json"
 import Image from "next/image";
+import LeaderBoard from "./leaderBoard";
 
 export function Lable(){
   return (
@@ -120,27 +121,8 @@ export default async function DashBoard() {
             </div>
 
             <div className="w-full md:w-2/5 flex flex-col">
-            <div>
-            <div className="flex flex-row flex-1 w-full text-center justify-between items-center mt-10 px-4 py-2 rounded-t-2xl bg-light-pink-2">
-                <div className="flex flex-row items-center flex-1">
-                  <div className="w-11 rounded-full"></div>
-                  <h2 className="text-sm font-bold font-Inter text-black/70  ml-2">User</h2>
-                  
-                </div>
-                <h2 className="text-sm font-bold font-Inter text-black/70 flex-1">Avg. Time</h2>
-                <h2 className="text-sm font-bold font-Inter text-black/70  flex-1">Matches</h2>
-                <h2 className="text-sm font-bold font-Inter text-black/70  flex-1">Points</h2>
-              </div>
-            </div>
-            <div className="bg-light-pink max-h-96 overflow-y-auto aspect-video rounded-b-2xl flex flex-col scroll-smooth [scrollbar-width:none]">
 
-              {
-                Rankers.map((user, index) => {
-                  return <LeaderboardCard user={user} key={index} index={index} />
-                })
-              }
-   
-            </div>
+            <LeaderBoard />
 
             <div className="flex flex-row-reverse mt-4 z-10">
               <Link href="/leaderboard">
@@ -192,7 +174,7 @@ export default async function DashBoard() {
             </div>
 
           </div>
-          <div className="flex flex-row z-10 gap-x-3 font-Inter font-medium">
+          <div className="flex flex-row z-10 gap-x-3 font-Inter font-medium mb-16">
             <h2 className="text-light-blue font-semibold">100x.devs</h2>
             <h2 className="text-gray-700/70">•</h2>
             <div className="flex flex-row gap-x-1">

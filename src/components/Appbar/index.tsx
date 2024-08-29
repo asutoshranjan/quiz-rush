@@ -24,7 +24,7 @@ export default function Appbar({name, publickey, }: {name: string, publickey: st
         <div className="flex flex-row w-full z-10 justify-between px-10 pt-5 mb-5 items-center">
             <div className="flex flex-row justify-center items-center">
               <CoinValue />
-              <Link href={`/user`} className="ml-3">
+              <Link href={`/user`} className="ml-3 mr-1">
               <IconUser className="h-8 w-8 text-deep-black flex justify-center items-center" />
               </Link>
             

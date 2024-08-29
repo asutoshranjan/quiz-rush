@@ -184,6 +184,8 @@ export async function POST(request: NextRequest) {
 
     const updatedUserData = {
       points: myUser.points + totalPoints,
+      locked: myUser.locked + totalPoints,
+      totalGames: myUser.totalGames + 1,
       avgAnswerTime: (myUser.avgAnswerTime + parseFloat(timeTaken)) / 2,
     };
 

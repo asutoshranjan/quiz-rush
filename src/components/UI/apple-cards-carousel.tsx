@@ -15,6 +15,7 @@ import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
 import Image, { ImageProps } from "next/image";
 import { useOutsideClick } from "../../lib/use-outside-click";
+import { useRouter } from "next/navigation";
 
 interface CarouselProps {
   items: JSX.Element[];
@@ -245,8 +246,13 @@ export const Card = ({
 
   useOutsideClick(containerRef, () => handleClose());
 
+  const router = useRouter();
+
   const handleOpen = () => {
-    setOpen(true);
+    // setOpen(true);
+
+    router.push(`/play`);
+
   };
 
   const handleClose = () => {
@@ -256,7 +262,7 @@ export const Card = ({
 
   return (
     <>
-      <AnimatePresence>
+      {/* <AnimatePresence>
         {open && (
           <div className="fixed inset-0 h-screen z-50 overflow-auto">
             <motion.div
@@ -295,7 +301,7 @@ export const Card = ({
             </motion.div>
           </div>
         )}
-      </AnimatePresence>
+      </AnimatePresence> */}
       <motion.button
         layoutId={layout ? `card-${card.title}` : undefined}
         onClick={handleOpen}

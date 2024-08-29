@@ -7,6 +7,8 @@ export interface User {
   quizSessions?: string[];
   points?: number;
   avgAnswerTime?: number;
+  locked?: number;
+  totalGames?: number;
 }
 
 export interface Question {
