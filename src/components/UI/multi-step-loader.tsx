@@ -47,10 +47,10 @@ const LoaderCore = ({
   value?: number;
 }) => {
   const totalSteps = loadingStates.length;
-  const centerOffset = (totalSteps - 1) * 24; // Adjust this value to control the centering
+  const centerOffset = (totalSteps - 1) * 20;
 
   return (
-    <div className="flex relative justify-center mx-auto flex-row mt-4">
+    <div className="flex relative justify-center mx-auto flex-row mt-4 overflow-x-hidden">
       {loadingStates.map((loadingState, index) => {
         const distance = Math.abs(index - value);
         const opacity = Math.max(1 - distance * 0.2, 0);
@@ -58,7 +58,9 @@ const LoaderCore = ({
         return (
           <motion.div
             key={index}
-            className={cn("text-center flex flex-col min-w-28 justify-center items-center gap-2")}
+            className={cn(
+              "text-center flex flex-col min-w-24 sm:min-w-28 justify-center items-center gap-2"
+            )}
             initial={{ opacity: 0, x: centerOffset }}
             animate={{ opacity: opacity, x: centerOffset - value * 40 }}
             transition={{ duration: 0.5 }}
@@ -76,7 +78,7 @@ const LoaderCore = ({
             </div>
             <span
               className={cn(
-                "text-light-grey font-Yeseva tracking-wide text-sm",
+                "text-light-grey font-Yeseva tracking-wide text-xs sm:text-sm",
                 value >= index && "text-black"
               )}
             >
@@ -138,7 +140,8 @@ export const MultiStepLoader = ({
           <div className="relative">
             <LoaderCore value={currentState} loadingStates={loadingStates} />
           </div>
-          <div className="bg-gradient-to-r inset-y-0 z-10 right-0 absolute [mask-image:linear-gradient(to_right,transparent_90%,white)]" />
+          {/* Gradient mask applied to create fade-in effect at edges */}
+          <div className="absolute inset-0 z-10 pointer-events-none [mask-image:linear-gradient(to_right,transparent_0%,white_20%,white_80%,transparent_100%)]" />
         </motion.div>
       )}
     </AnimatePresence>

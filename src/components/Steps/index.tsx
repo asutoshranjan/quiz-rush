@@ -1,6 +1,4 @@
 "use client";
-import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { MultiStepLoader } from "../UI/multi-step-loader";
 
 
