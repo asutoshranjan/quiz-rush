@@ -65,7 +65,7 @@ export async function POST(request: NextRequest) {
           publickey: myUser.walletPublicKey,
         };
 
-        const expires = new Date(Date.now() + 20 * 60000); // 20 minutes
+        const expires = new Date(Date.now() + 30 * 60000); // 30 minutes
         const session = await encrypt({ user, expires });
 
         // Set the cookie with the session
