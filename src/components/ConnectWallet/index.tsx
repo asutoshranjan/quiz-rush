@@ -97,13 +97,18 @@ export default function ConnectWallet({ session }: { session: string }) {
 
   async function logout() {
     try {
-      await fetch(`/api/logout`, {
+      const response = await fetch(`/api/logout`, {
         method: "GET",
-      }).then((res) => {
-        console.log("Logout Response:", res);
+      });
+  
+      if (response.ok) {
+        console.log("Logout Response:", response);
         // window.location.href = "/login";
         router.push("/login");
-      });
+      } else {
+        // Toast({ type: "Error", message: "Failed to logout" });
+        throw new Error("Failed to logout.");
+      }
     } catch (err: any) {
       console.log(err);
       Toast({ type: "Error", message: err.message || "Failed to logout" });

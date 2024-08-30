@@ -3,7 +3,17 @@ import { NextRequest, NextResponse } from "next/server";
 // Logout API handler
 export async function GET(req: NextRequest) {
   if (req.method == "GET") {
-    const response = NextResponse.json({ success: true }, { status: 200 });
+
+    // make sure the session cookie is cleared and not cached
+    const response = NextResponse.json({ success: true }, { 
+      status: 200, 
+      headers: {
+      "Cache-Control": "no-store, no-cache, must-revalidate",
+      "Pragma": "no-cache",
+      "Expires": "0",
+    },});
+
+    
 
     // Clear the session cookie by setting an expired date
     response.cookies.set({
