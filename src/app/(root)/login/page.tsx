@@ -8,6 +8,7 @@ import Play from "../../../../public/play.json";
 import solanaImg from "../../../../public/solana.png";
 import LoginForm from "@/components/UI/LoginForm";
 import Image from "next/image";
+import StepsComponent from "@/components/Steps";
 
 export default async function Home() {
   const session = await getSession();
@@ -48,12 +49,11 @@ export default async function Home() {
         </div>
         <div className="flex-1 ">
           <div className="flex flex-col min-h-screen justify-evenly items-center">
-            <div className="h-10"></div>
+            <StepsComponent />
             <div className="flex flex-col items-center">
-              <h2 className="text-4xl font-Yeseva mb-8">Welcome</h2>
               <LoginForm />
-              <h2 className="z-10 font-Yeseva tracking-wide text-center text-gray-800/90 text-xl mt-6">
-                {`Play some quiz. Let's Go!`}
+              <h2 className="z-10 font-Yeseva tracking-wide text-center text-gray-800/80 text-lg mt-6">
+                {`Connect Wallet. Let's Go!`}
               </h2>
             </div>
             <div className="flex flex-col justify-center items-center">

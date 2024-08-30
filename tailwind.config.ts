@@ -42,10 +42,7 @@ const config: Config = {
       fontFamily: {
         "Inter": ["Inter", "sans-serif"],
         "Yeseva": ["Yeseva One", "serif"],
-      },
-      animation: {
-        "shimmer": "shimmer 2s linear infinite",
-      },
+      },     
       keyframes: {
         shimmer: {
           from: {
@@ -54,8 +51,16 @@ const config: Config = {
           to: {
             backgroundPosition: "-200% 0",
           },
-        }
-      }
+        },
+        fadeIn: {
+          '0%': { opacity: '0', transform: 'scale(0.98)' },
+          '100%': { opacity: '1', transform: 'scale(1)' },
+        },
+      },
+      animation: {
+        "shimmer": "shimmer 2s linear infinite",
+        "fadeIn": 'fadeIn 0.5s ease-in-out forwards',
+      },
     },
   },
   plugins: [

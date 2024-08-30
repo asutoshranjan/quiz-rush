@@ -33,7 +33,7 @@ export async function POST(request: NextRequest) {
         const getAllValidQuestionSets = await databases.listDocuments(
             databaseId,
             questionSetCollectionId,
-            [Query.equal("approved", true)]
+            [Query.equal("approved", true), Query.orderAsc("$updatedAt")]
         );
 
         const questionSets = getAllValidQuestionSets.documents;
