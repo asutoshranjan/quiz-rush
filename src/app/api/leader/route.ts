@@ -8,20 +8,6 @@ export async function POST(request: NextRequest) {
 
     const limit = reqData.limit || 30;
 
-    const session = request.cookies.get("session")?.value;
-
-    if (!session) {
-        return NextResponse.json({ message: "Unauthorized you dont have the right access" }, {status: 401});
-    }
-
-    const parsed = await decrypt(session);
-
-    console.log("getUser", parsed);
-
-    if(!parsed.user) {
-        return NextResponse.json({ message: "Bad request incorrect token" }, {status: 400});
-    }
-
     if (request.method !== "POST") {
         return NextResponse.json({ message: "This Method Not Allowed" }, {status: 405});
     }

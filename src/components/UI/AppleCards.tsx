@@ -51,7 +51,7 @@ export function AppleCards() {
 
   if (response == null || response.length === 0) {
     return (
-      <div className="h-96 flex flex-col items-center justify-center">
+      <div className="h-[28rem] flex flex-col items-center justify-center">
         <div className="text-gray-500">Loading..</div>
       </div>
     );

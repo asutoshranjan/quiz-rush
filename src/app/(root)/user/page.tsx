@@ -8,7 +8,7 @@ export default async function UserPage() {
   const session = await getSession();
 
   if(!session) {
-    redirect("/login");
+    redirect("/");
   }
   console.log(session);
   

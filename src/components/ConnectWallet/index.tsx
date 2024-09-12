@@ -89,9 +89,13 @@ export default function ConnectWallet({ session }: { session: string }) {
   useEffect(() => {
     if (publicKey) {
       // perform login if session does not exist
-      if (session == "") {
-        login(publicKey.toBase58());
-      }
+
+      // TODO: session check is imp
+      // if (session == "") {
+      //   login(publicKey.toBase58());
+      // }
+
+      login(publicKey.toBase58());
     }
   }, [publicKey]);
 
@@ -104,7 +108,7 @@ export default function ConnectWallet({ session }: { session: string }) {
       if (response.ok) {
         console.log("Logout Response:", response);
         // window.location.href = "/login";
-        router.push("/login");
+        // router.push("/login");
       } else {
         // Toast({ type: "Error", message: "Failed to logout" });
         throw new Error("Failed to logout.");

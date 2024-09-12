@@ -10,7 +10,7 @@ export async function POST(request: NextRequest) {
         const session = request.cookies.get("session")?.value;
 
         if (!session) {
-            return NextResponse.json({ message: "Unauthorized: You don't have the right access" }, { status: 401 });
+            return NextResponse.json({ message: "Sign in with wallet to play games" }, { status: 401 });
         }
 
         const parsed = await decrypt(session);
@@ -117,6 +117,6 @@ export async function POST(request: NextRequest) {
             return NextResponse.json({ message: "Invalid JSON input" }, { status: 400 });
         }
 
-        return NextResponse.json({ message: "Internal Server Error" }, { status: 500 });
+        return NextResponse.json({ message: "Server Error: Failed to create game session" }, { status: 500 });
     }
 }

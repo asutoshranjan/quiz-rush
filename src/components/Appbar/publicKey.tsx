@@ -29,21 +29,21 @@ export default function CopyablePublicKey({
   function RenderCopy({isCoppied}: {isCoppied: boolean}) {
     if (isCoppied) {
       return (
-        <div className="flex flex-row text-base text-deep-green items-center">
+        <div className="flex flex-row text-sm text-deep-green items-center">
           <div>Copied</div>
-          <IconCheck className="h-6 w-5" />
+          <IconCheck className="h-5 w-5" />
         </div>
       );
     } else {
       return (
         <button onClick={copy}>
-          <IconCopy className="h-5 w-5 text-deep-black flex justify-center items-center" />
+          <IconCopy className="h-4 w-4 text-deep-black flex justify-center items-center" />
         </button>
       );
     }
   }
   return (
-    <h2 className="flex flex-1 text-base font-Inter font-medium text-deep-black gap-x-2">
+    <h2 className="flex flex-1 text-sm font-Inter font-medium text-deep-black gap-x-2">
       {formatPublicKey(publickey, 5)}
       <RenderCopy isCoppied={copied} />
     </h2>

@@ -8,7 +8,7 @@ export default async function Redeem() {
     const session = await getSession();
 
   if(!session) {
-    redirect("/login");
+    redirect("/");
   }
   console.log(session);
     return (

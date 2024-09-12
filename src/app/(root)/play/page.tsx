@@ -67,8 +67,8 @@ export default function PlayPage() {
 
       if (!response.ok) {
         const errorData = await response.json();
-        Toast({ type: "Error", message: errorData.message || "Failed to create game" });
-        throw new Error("Failed to add question.");
+        // Toast({ type: "Error", message: err || "Failed to create game" });
+        throw new Error(`${errorData.message}`);
       }
 
       const data = await response.json();

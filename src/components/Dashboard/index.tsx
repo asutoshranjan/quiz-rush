@@ -39,7 +39,7 @@ export default async function DashBoard() {
   return (
     <GridBackgroundDemo>
       <div className="flex min-h-screen w-full flex-col items-center justify-between">
-        <Appbar name={session.user.name} publickey={session.user.publickey} />
+        <Appbar />
         <div className="flex flex-col justify-center items-center gap-4">
           <h2 className="text-5xl z-10 font-Yeseva tracking-wide text-red-700/75">
             QuizRush
@@ -150,6 +150,16 @@ export default async function DashBoard() {
             <div className="flex flex-row-reverse md:absolute z-10 md:translate-x-40 md:-translate-y-32"></div>
           </div>
         </div>
+
+        <div className="w-full z-10 mb-4 mt-2 flex flex-col justify-center items-center">
+          <iframe
+            className="w-4/5 md:w-1/2 aspect-video md:min-h-96"
+            src="https://www.youtube.com/embed/Ky4W112GfXg?si=1QV7y6vzOS2SCo8P"
+            title="Product Overview Video"
+            aria-hidden="true"
+          />
+        </div>
+
         <div className="flex flex-row z-10 gap-x-3 font-Inter font-medium mb-4 mt-14">
           <h2 className="text-light-blue font-semibold">100x.devs</h2>
           <h2 className="text-gray-700/70">•</h2>
